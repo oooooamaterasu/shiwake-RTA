@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>経理RTA (Demo v4)</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="app" class="app">
+
+    <section id="screenStart" class="screen">
+      <div class="start-wrap">
+        <div class="start-top">
+          <div class="start-title">経理RTA</div>
+          <div class="start-sub">難易度プリセット（EASY / NORMAL / HARD）</div>
+        </div>
+
+        <div class="start-card">
+          <div class="start-main">
+            <label class="field-label" for="playerName">名前を入力</label>
+            <div class="name-row">
+              <input id="playerName" class="name-input" placeholder="田中" maxlength="12" />
+              <span class="name-suffix">さん</span>
+            </div>
+
+            <div class="difficulty-row">
+              <label class="field-label" for="difficulty">難易度</label>
+              <select id="difficulty" class="difficulty-select">
+                <option value="easy">EASY（8枚 / 確認ボタンあり）</option>
+                <option value="normal" selected>NORMAL（10枚）</option>
+                <option value="hard">HARD（15枚）</option>
+              </select>
+            </div>
+
+            <button id="btnStart" class="start-btn">はじめる</button>
+
+            <div class="start-note">
+              ・1枚につき4ステップ（1つずつ進む）<br />
+              ・スクロールは領収書だけ（右側は固定）<br />
+              ・EASYは「確認する（+8秒）」で現在のSTEPが1つ確定（スパッと快感）
+            </div>
+          </div>
+
+          <div class="start-right">
+            <div class="hs-title">ハイスコア</div>
+            <ol id="highscoreList" class="hs-list"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenGame" class="screen hidden">
+      <header class="topbar">
+        <button id="btnHome" class="icon-btn" aria-label="スタート画面に戻る">⟵</button>
+        <div class="topbar-center">
+          <div class="pill" id="progressPill">1 / 10</div>
+          <div class="pill" id="stepPill">STEP 1 / 4</div>
+          <div class="pill" id="timerPill">00:00.0</div>
+          <div class="pill" id="playerPill">Player</div>
+        </div>
+        <button id="btnHelp" class="icon-btn" aria-label="ヘルプ">?</button>
+      </header>
+
+      <main class="main">
+        <section class="receipt-panel" aria-label="領収書">
+          <div class="receipt-frame">
+            <pre id="receiptText" class="receipt-text">Loading...</pre>
+          </div>
+          <div class="receipt-scroll-hint" aria-hidden="true">長い領収書はここだけスクロールできます</div>
+        </section>
+
+        <section class="decision-panel" aria-label="入力と選択">
+          <div class="npc">
+            <div class="npc-bubble" id="npcBubble">よし、まずは1枚目！</div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" id="stepTitle">STEP 1：勘定科目</h2>
+            <div id="stepChoices" class="choice-grid"></div>
+          </div>
+
+          <div class="step-actions">
+            <button id="btnPrevStep" class="secondary-btn">ひとつ戻る</button>
+            <button id="btnNextStep" class="primary-btn">次へ</button>
+          </div>
+
+          <div class="easy-actions" id="easyActions">
+            <button id="btnConfirmHint" class="hint-btn">確認する（+8秒）</button>
+            <div class="hint-note">EASY限定：いまのSTEPの正解が1つ確定します</div>
+          </div>
+
+          <div class="picked">
+            <div class="picked-row"><span>STEP1</span><b id="picked1">—</b></div>
+            <div class="picked-row"><span>STEP2</span><b id="picked2">—</b></div>
+            <div class="picked-row"><span>STEP3</span><b id="picked3">—</b></div>
+            <div class="picked-row"><span>STEP4</span><b id="picked4">—</b></div>
+          </div>
+
+          <div class="status">
+            <div>スコア：<span id="scoreText">0</span></div>
+            <div>ミス：<span id="missText">0</span></div>
+            <div>要確認：<span id="holdText">0</span></div>
+            <div>加算時間：<span id="penaltyText">+0.0s</span></div>
+          </div>
+        </section>
+      </main>
+    </section>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <h3 id="modalTitle">結果</h3>
+        <div id="modalBody" class="modal-body"></div>
+        <div class="modal-actions">
+          <button id="btnModalPrimary" class="primary-btn">スタート画面に戻る</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
