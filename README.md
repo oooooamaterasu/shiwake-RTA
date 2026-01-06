@@ -1,10 +1,12 @@
 # 🧾 仕訳RTA — 経理仕訳タイムアタックゲーム
+https://shiwake-rta.vercel.app/
 
 **仕訳RTA** は、月末の面倒な経理仕訳をゲーム化したミニゲームです。  
 実務っぽい領収書を次々に仕訳していき、**正確さ × 速さ** を競います！
 
 EASY / NORMAL / HARD の3つのモードを用意しており、  
 初心者から実務経験者まで楽しめる設計です。
+https://vercel.com/oooooamaterasu-gmailcoms-projects/shiwake-rta
 
 ---
 
